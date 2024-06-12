@@ -11,11 +11,6 @@ export default function Welcome({ auth }) {
         <>
             <Head title="Bem vindo" />
             <div className="bg-gray-50 text-black/50 dark:text-white/50">
-                <img
-                    id="background"
-                    className="absolute -left-20 top-0 max-w-[877px]"
-                    src="https://laravel.com/assets/img/welcome/background.svg"
-                />
                 <div className="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#ffe863] selection:text-black">
                     <div className="relative w-full max-w-2xl px-6 lg:max-w-7xl">
                         <Header
