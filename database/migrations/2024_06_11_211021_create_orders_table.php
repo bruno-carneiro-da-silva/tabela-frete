@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('cargo_type_id')->constrained('cargo_type')->onDelete('cascade');
             $table->foreignId('cost_coefficient_id')->constrained('cost_coefficient')->onDelete('cascade');
-            $table->foreignId('kilometers_id')->constrained('kilometers')->onDelete('cascade');
+            $table->decimal('kilometers', 8, 2);
             $table->timestamps();
         });
     }
