@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('FreightCost', function (Blueprint $table) {
+        Schema::create('freight_costs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cargo_type_id')->constrained('cargo_type')->onDelete('cascade');
-            $table->foreignId('cost_coefficient_id')->constrained('cost_coefficient')->onDelete('cascade');
+            $table->foreignId('cargo_type_id')->constrained('cargo_types')->onDelete('cascade');
+            $table->foreignId('cost_coefficient_id')->constrained('cost_coefficients')->onDelete('cascade');
+            $table->foreignId('resolution_id')->constrained('resolutions')->onDelete('cascade');
             $table->decimal('kilometers', 8, 2);
             $table->timestamps();
         });

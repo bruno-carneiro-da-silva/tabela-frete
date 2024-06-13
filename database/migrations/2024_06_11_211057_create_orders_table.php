@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cargo_type', function (Blueprint $table) {
+        Schema::create('cargo_types', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255)->unique()->nullable(false);
             $table->decimal('value_per_axis', 10, 4)->nullable(false);

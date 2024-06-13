@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cost_coefficients', function (Blueprint $table) {
+        Schema::create('resolutions', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 255)->unique()->nullable(false);
-            $table->decimal('value', 10, 4)->nullable(false);
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cost_coefficient');
+        Schema::dropIfExists('resolution');
     }
 };
