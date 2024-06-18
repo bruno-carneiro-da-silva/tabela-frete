@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('freight_costs', function (Blueprint $table) {
+        Schema::create('high_performance_motor_vehicle', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cargo_type_id')->constrained('cargo_types')->onDelete('cascade');
-            $table->foreignId('cost_coefficient_id')->constrained('cost_coefficients')->onDelete('cascade');
             $table->foreignId('resolution_id')->constrained('resolutions')->onDelete('cascade');
-            $table->decimal('kilometers', 8, 2);
+            $table->string('load_type');
+            $table->enum('cost_coefficient', ['CC', 'CCD']);
+            $table->string('unit');
+            $table->json('number_of_axles');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('FreightCost');
+        Schema::dropIfExists('high_performance_motor_vehicle');
     }
 };

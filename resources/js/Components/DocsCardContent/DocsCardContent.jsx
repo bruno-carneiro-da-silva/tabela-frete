@@ -6,14 +6,13 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import InputError from "@/Components/InputError";
 import { useForm } from "@inertiajs/react";
 
-const DocsCardContent = () => {
+const  DocsCardContent = () => {
     const { data, setData, post, processing, errors, reset } = useForm({
         resolution: null,
         cargo_category: null,
         cargo_type: null,
         count_axies: null,
         kilometers: "",
-        // Adicione aqui outros campos do formulário se necessário
     });
 
     const handleOptionSelected = (name, option) => {
