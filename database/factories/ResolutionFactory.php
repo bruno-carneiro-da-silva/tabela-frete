@@ -1,23 +1,19 @@
 <?php
 
-namespace Database\Factories;
-
+use App\Models\Resolution;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Resolution>
- */
 class ResolutionFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+    protected $model = Resolution::class;
+
+    public function definition()
     {
         return [
-            'name' => $this->faker->name,
+            'name' => $this->faker->word,
+            'link' => $this->faker->url,
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }

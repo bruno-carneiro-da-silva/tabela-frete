@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
             ResolutionSeeder::class,
             FreightCostSeeder::class,
             CapacityLoadSeeder::class,
-            
+            HighPerfomanceCapacityTableSeeder::class,
+            MotorVehicleTableSeeder::class,
         ]);
     }
 }

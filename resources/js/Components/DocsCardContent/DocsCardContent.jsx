@@ -6,13 +6,13 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import InputError from "@/Components/InputError";
 import { useForm } from "@inertiajs/react";
 
-const  DocsCardContent = () => {
+const DocsCardContent = () => {
     const { data, setData, post, processing, errors, reset } = useForm({
         resolution: null,
         cargo_category: null,
-        cargo_type: null,
-        count_axies: null,
-        kilometers: "",
+        load_type: null,
+        number_of_axles: "",
+        distance: "",
     });
 
     const handleOptionSelected = (name, option) => {
@@ -22,8 +22,16 @@ const  DocsCardContent = () => {
     const hadleSubmit = (e) => {
         e.preventDefault();
         console.log("data", data);
-        // Aqui você pode fazer a chamada para a API
-        // post(route("calculate-freight"));
+        post(route("calculate"), {
+            resolution: data.resolution, // Ajuste para enviar a ID da resolução corretamente
+            load_type: data.load_type, // Ajuste para enviar o tipo de carga corretamente
+            number_of_axles: data.number_of_axles,
+            distance: data.distance,
+        }).then((res) => {
+                console.log("Response from backend:", response);
+        }).catch((error) => {
+                console.error("Error:", error);
+        });
     };
     return (
         <form onSubmit={hadleSubmit}>
@@ -39,31 +47,7 @@ const  DocsCardContent = () => {
                 <CustomDropdown
                     triggerText="Conteudo"
                     name="resolution"
-                    options={[
-                        "18/01/2024, Resolução Nº 6.034 (atual)",
-                        "28/08/2023, Portaria Nº 20",
-                        "21/08/2023, Portaria Nº 19",
-                        "20/07/2023, Resolução Nº 6.022",
-                        "05/06/2023, Portaria Nº 13",
-                        "22/05/2023, Portaria Nº 11",
-                        "25/04/2023, Portaria Nº 8",
-                        "17/02/2023, Portaria Nº 5",
-                        "19/01/2023, Resolução Nº 6.006 ",
-                        "03/10/2022, Portaria SUROC nº 219",
-                        "22/08/2022, Portaria Nº 214",
-                        "20/07/2022, Resolução Nº 5.985",
-                        "24/06/2022, Portaria Nº 210",
-                        "18/03/2022, Portaria Nº 169",
-                        "21/01/2022, Resolução Nº 5.959",
-                        "21/10/2021, Portaria Nº 496",
-                        "14/07/2021, Resolução Nº 5.949",
-                        "03/03/2021, Portaria Nº 90",
-                        "18/01/2021, Resolução Nº 5.923",
-                        "03/11/2020, Portaria Nº 399",
-                        "14/07/2020, Resolução Nº 5.899",
-                        "26/05/2020, Resolução Nº 5.890",
-                        "14/01/2020, Resolução Nº 5.867",
-                    ]}
+                    options={["18/01/2024, Resolução Nº 6.034 (atual)"]}
                     onOptionSelected={(option) =>
                         handleOptionSelected("resolution", option)
                     }
@@ -91,18 +75,18 @@ const  DocsCardContent = () => {
 
                 <div className="grid gap-6 lg:grid-cols-2  justify-between">
                     <InputLabel
-                        htmlFor="cargo_type"
+                        htmlFor="load_type"
                         className="text-[#374151]"
                         value="Tipo de carga:"
                     />
                     <InputLabel
-                        htmlFor="count_axies"
+                        htmlFor="number_of_axles"
                         className="text-[#374151]"
                         value="Num. eixos:"
                     />
                     <CustomDropdown
                         short={true}
-                        name="cargo_type"
+                        name="load_type"
                         options={[
                             "Granel sólido",
                             "Granel líquido",
@@ -121,33 +105,36 @@ const  DocsCardContent = () => {
                             handleOptionSelected("cargo_type", option)
                         }
                     />
-                    <InputError message={errors.cargo_type} className="mt-2" />
+                    <InputError message={errors.load_type} className="mt-2" />
 
                     <CustomDropdown
                         short={true}
-                        name="count_axies"
+                        name="number_of_axles"
                         options={["2", "3", "4", "5", "6", "7", "9"]}
                         onOptionSelected={(option) =>
                             handleOptionSelected("count_axies", option)
                         }
                     />
-                    <InputError message={errors.count_axies} className="mt-2" />
+                    <InputError
+                        message={errors.number_of_axles}
+                        className="mt-2"
+                    />
                 </div>
                 <InputLabel
-                    htmlFor="kilometers"
+                    htmlFor="distance"
                     className="text-[#374151]"
                     value="Distância(KM)"
                 />
                 <TextInput
                     type="text"
-                    name="kilometers"
-                    id="kilometers"
+                    name="distance"
+                    id="distance"
                     className="w-full border border-spacing-1 text-black border-gray-400 h-[49px]"
                     placeholder="3000"
-                    value={data.kilometers}
-                    onChange={(e) => setData("kilometers", e.target.value)}
+                    value={data.distance}
+                    onChange={(e) => setData("distance", e.target.value)}
                 />
-                <InputError message={errors.kilometers} className="mt-2" />
+                <InputError message={errors.distance} className="mt-2" />
 
                 <PrimaryButton
                     type="submit"

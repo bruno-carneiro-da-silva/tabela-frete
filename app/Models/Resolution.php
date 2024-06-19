@@ -4,12 +4,33 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class Resolution extends Model
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = [
+        'name',
+        'link',
+    ];
+
+    public function capacityLoads()
+    {
+        return $this->hasMany(CapacityLoad::class);
+    }
+
+    public function motorVehicles()
+    {
+        return $this->hasMany(MotorVehicle::class);
+    }
+
+    public function highPerformanceCapacityLoads()
+    {
+        return $this->hasMany(HighPerformanceCapacityLoad::class);
+    }
+
+    public function highPerformanceMotorVehicles()
+    {
+        return $this->hasMany(HighPerformanceMotorVehicle::class);
+    }
 }

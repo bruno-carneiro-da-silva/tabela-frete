@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('resolutions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('link')->nullable();
             $table->timestamps();
         });
     }

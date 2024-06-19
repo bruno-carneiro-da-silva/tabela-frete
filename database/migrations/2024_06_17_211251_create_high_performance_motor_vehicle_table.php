@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('resolution_id')->constrained('resolutions')->onDelete('cascade');
             $table->string('load_type');
             $table->enum('cost_coefficient', ['CC', 'CCD']);
-            $table->string('unit');
+            $table->string('distance');
             $table->json('number_of_axles');
             $table->timestamps();
         });
