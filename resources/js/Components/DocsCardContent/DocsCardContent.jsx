@@ -19,22 +19,24 @@ const DocsCardContent = () => {
         setData(name, option);
     };
 
-    const hadleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("data", data);
-        post(route("calculate"), {
-            resolution: data.resolution, // Ajuste para enviar a ID da resolução corretamente
-            load_type: data.load_type, // Ajuste para enviar o tipo de carga corretamente
-            number_of_axles: data.number_of_axles,
-            distance: data.distance,
-        }).then((res) => {
-                console.log("Response from backend:", response);
-        }).catch((error) => {
-                console.error("Error:", error);
-        });
+        try {
+            const response = await post(route("calculate"), {
+                resolution: data.resolution, // Ajuste para enviar a ID da resolução corretamente
+                load_type: data.load_type, // Ajuste para enviar o tipo de carga corretamente
+                number_of_axles: data.number_of_axles,
+                distance: data.distance,
+            });
+            console.log("Response from backend:", response);
+        } catch (error) {
+            console.error("Error:", error);
+        }
     };
+
     return (
-        <form onSubmit={hadleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div
                 id="docs-card-content"
                 className="flex items-start gap-6 lg:flex-col"
@@ -102,7 +104,7 @@ const DocsCardContent = () => {
                             "Carga Granel Pressurizada",
                         ]}
                         onOptionSelected={(option) =>
-                            handleOptionSelected("cargo_type", option)
+                            handleOptionSelected("load_type", option)
                         }
                     />
                     <InputError message={errors.load_type} className="mt-2" />
@@ -112,7 +114,7 @@ const DocsCardContent = () => {
                         name="number_of_axles"
                         options={["2", "3", "4", "5", "6", "7", "9"]}
                         onOptionSelected={(option) =>
-                            handleOptionSelected("count_axies", option)
+                            handleOptionSelected("number_of_axles", option)
                         }
                     />
                     <InputError

@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('motor_vehicles', function (Blueprint $table) {
+        Schema::create('axle_values', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('resolution_id')->constrained('resolutions')->onDelete('cascade');
-            $table->string('load_type');
-            $table->enum('cost_coefficient', ['CC', 'CCD']);
-            $table->string('distance');
-            $table->json('number_of_axles');
+            $table->foreignId('load_type_id')->constrained('load_types')->onDelete('cascade');
+            $table->unsignedInteger('number_of_axles');
+            $table->decimal('cdd_value', 8, 2);
+            $table->decimal('cd_value', 8, 2);
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('motor_vehicles');
+        Schema::dropIfExists('axle_values');
     }
 };

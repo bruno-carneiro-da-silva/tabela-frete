@@ -10,10 +10,12 @@ return new class extends Migration
         Schema::create('capacity_loads', function (Blueprint $table) {
             $table->id();
             $table->foreignId('resolution_id')->constrained('resolutions')->onDelete('cascade');
-            $table->string('load_type');
-            $table->enum('cost_coefficient', ['CC', 'CCD']);
-            $table->string('distance');
-            $table->json('number_of_axles');
+            $table->foreignId('cargo_category_id')->constrained('cargo_categories')->onDelete('cascade');
+            $table->foreignId('load_type_id')->constrained('load_types')->onDelete('cascade');
+            $table->integer('number_of_axles');
+            $table->integer('distance');
+            $table->decimal('cdd_value', 8, 2); // Adicionar coluna cdd_value
+            $table->decimal('cd_value', 8, 2); // Adicionar coluna cd_value
             $table->timestamps();
         });
     }

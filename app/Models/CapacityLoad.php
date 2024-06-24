@@ -11,18 +11,26 @@ class CapacityLoad extends Model
 
     protected $fillable = [
         'resolution_id',
-        'load_type',
-        'cost_type',
+        'cargo_category_id',
+        'load_type_id',
+        'number_of_axles',
         'distance',
-        'number_of_axles'
-    ];
-
-    protected $casts = [
-        'number_of_axles' => 'array',
+        'cdd_value',
+        'cd_value',
     ];
 
     public function resolution()
     {
         return $this->belongsTo(Resolution::class);
+    }
+
+    public function cargoCategory()
+    {
+        return $this->belongsTo(CargoCategory::class);
+    }
+
+    public function loadType()
+    {
+        return $this->belongsTo(LoadType::class);
     }
 }
